@@ -10,7 +10,8 @@ public class TrashSpawner : MonoBehaviour
     [SerializeField] private TrashItem[] trashPrefabs;
 
     [Header("Spawn Settings")]
-    [SerializeField] private float spawnInterval = 1.5f;
+    [SerializeField] private float spawnInterval = 1.0f;
+    [SerializeField] private int trashPerSpawn = 5;
 
     [Header("Position")]
     [SerializeField] private float spawnY = 600f;
@@ -22,13 +23,22 @@ public class TrashSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnInterval);
-
             if (gameManager != null &&
                 !gameManager.IsGameOver)
             {
-                SpawnTrash();
+                // Spawn ขยะหลายชิ้นพร้อมกัน
+                SpawnTrashGroup();
             }
+
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
+    private void SpawnTrashGroup()
+    {
+        for (int i = 0; i < trashPerSpawn; i++)
+        {
+            SpawnTrash();
         }
     }
 
@@ -67,7 +77,6 @@ public class TrashSpawner : MonoBehaviour
             spawnY
         );
 
-        // ส่ง GameManager + ถังขยะ + ตำแหน่งพื้น
         newTrash.Initialize(
             gameManager,
             trashBin,

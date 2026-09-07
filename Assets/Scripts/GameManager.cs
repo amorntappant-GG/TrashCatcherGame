@@ -1,97 +1,155 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text comboText;
-    [SerializeField] private TMP_Text tutorialText;
+    [SerializeField] private TMP_Text overloadText;
+    [SerializeField] private Slider overloadSlider;
+
+    [Header("Game Over")]
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private Button restartButton;
+
+    [Header("You Win")]
+    [SerializeField] private GameObject winPanel;
 
     [Header("Game Settings")]
-    [SerializeField] private int winScore = 500;
+    [SerializeField] private int winScore = 1000;
+    [SerializeField] private int maxCombo = 3;
+
+    [Header("Overload Settings")]
+    [SerializeField] private float maxOverload = 100f;
+    [SerializeField] private float overloadIncrease = 10f;
 
     private int score;
     private int combo;
-    private bool gameOver;
+    private float overload;
 
-    public bool IsGameOver => gameOver;
+    private bool gameOver;
+    private bool hasWon;
+
+    public bool IsGameOver => gameOver || hasWon;
 
     private void Start()
     {
-        UpdateUI();
+        score = 0;
+        combo = 0;
+        overload = 0f;
+        gameOver = false;
+        hasWon = false;
 
-        if (tutorialText != null)
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+
+        if (winPanel != null)
+            winPanel.SetActive(false);
+
+        if (restartButton != null)
+            restartButton.onClick.AddListener(RestartGame);
+
+        if (overloadSlider != null)
         {
-            tutorialText.gameObject.SetActive(true);
-            tutorialText.text = "CLICK THE TRASH!";
+            overloadSlider.minValue = 0f;
+            overloadSlider.maxValue = maxOverload;
+            overloadSlider.value = overload;
         }
+
+        UpdateUI();
     }
 
-    // เก็บขยะสำเร็จ
     public void CollectWaste()
     {
-        if (gameOver) return;
+        if (gameOver || hasWon)
+            return;
 
-        combo++;
+        combo = Mathf.Min(combo + 1, maxCombo);
+
         score += 10 * combo;
-
-        UpdateUI();
 
         if (score >= winScore)
         {
             score = winScore;
             UpdateUI();
             TriggerWin();
+            return;
         }
+
+        UpdateUI();
     }
 
-    // ใช้สำหรับ TrashItem เรียกเมื่อขยะถึงถัง
     public void AddWaste()
     {
         CollectWaste();
     }
 
-    // ขยะตกถึงพื้น
-    public void TrashHitFloor()
+    public void AddOverload()
     {
-        if (gameOver) return;
+        if (gameOver || hasWon)
+            return;
 
-        TriggerGameOver();
+        overload += overloadIncrease;
+        overload = Mathf.Clamp(overload, 0f, maxOverload);
+
+        UpdateUI();
+
+        if (overload >= maxOverload)
+        {
+            TriggerGameOver();
+        }
     }
 
     private void UpdateUI()
     {
         if (scoreText != null)
-        {
             scoreText.text = $"SCORE {score} / {winScore}";
-        }
 
         if (comboText != null)
-        {
             comboText.text = $"COMBO X{combo}";
-        }
-    }
 
-    private void TriggerWin()
-    {
-        gameOver = true;
+        if (overloadText != null)
+            overloadText.text = $"OVERLOAD {overload:0}%";
 
-        if (tutorialText != null)
-        {
-            tutorialText.gameObject.SetActive(true);
-            tutorialText.text = "YOU WIN!";
-        }
+        if (overloadSlider != null)
+            overloadSlider.value = overload;
     }
 
     private void TriggerGameOver()
     {
+        if (gameOver)
+            return;
+
         gameOver = true;
 
-        if (tutorialText != null)
-        {
-            tutorialText.gameObject.SetActive(true);
-            tutorialText.text = "GAME OVER!";
-        }
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+    }
+
+    private void TriggerWin()
+    {
+        if (hasWon)
+            return;
+
+        hasWon = true;
+
+        if (winPanel != null)
+            winPanel.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
+    }
+
+    private void OnDestroy()
+    {
+        if (restartButton != null)
+            restartButton.onClick.RemoveListener(RestartGame);
     }
 }

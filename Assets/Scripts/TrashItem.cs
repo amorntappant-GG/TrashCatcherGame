@@ -1,14 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class TrashItem : MonoBehaviour
+public class TrashItem : MonoBehaviour, IPointerEnterHandler
 {
     [Header("Settings")]
-    [SerializeField] private float fallSpeed = 250f;
-    [SerializeField] private float collectSpeed = 800f;
+    [SerializeField] private float fallSpeed = 10000f;
+    [SerializeField] private float collectSpeed = 1000f;
 
     private RectTransform rectTransform;
-    private Button button;
     private GameManager gameManager;
     private RectTransform trashBin;
 
@@ -16,16 +15,11 @@ public class TrashItem : MonoBehaviour
 
     private bool isOnFloor;
     private bool isCollecting;
+    private bool collected;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        button = GetComponent<Button>();
-
-        if (button != null)
-        {
-            button.onClick.AddListener(CollectTrash);
-        }
     }
 
     public void Initialize(
@@ -41,38 +35,51 @@ public class TrashItem : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager != null && gameManager.IsGameOver)
+        if (gameManager == null)
             return;
 
-        // กำลังบินเข้าถัง
+        if (gameManager.IsGameOver)
+            return;
+
+        // =====================
+        // กำลังบินไปถังขยะ
+        // =====================
         if (isCollecting)
         {
             MoveToTrashBin();
             return;
         }
 
+        // =====================
         // ตกลงพื้น
+        // =====================
         if (!isOnFloor)
         {
-            rectTransform.anchoredPosition +=
-                Vector2.down * fallSpeed * Time.deltaTime;
+            Vector2 position = rectTransform.anchoredPosition;
 
-            if (rectTransform.anchoredPosition.y <= floorY)
+            position.y -= fallSpeed * Time.deltaTime;
+
+            rectTransform.anchoredPosition = position;
+
+            if (position.y <= floorY)
             {
-                Vector2 position = rectTransform.anchoredPosition;
-
                 position.y = floorY;
-
                 rectTransform.anchoredPosition = position;
 
                 isOnFloor = true;
+
+                // ขยะตกถึงพื้น
+                gameManager.AddOverload();
             }
         }
     }
 
-    private void CollectTrash()
+    // =====================
+    // เมาส์แตะขยะ
+    // =====================
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isCollecting)
+        if (collected)
             return;
 
         if (gameManager == null)
@@ -84,15 +91,13 @@ public class TrashItem : MonoBehaviour
         if (trashBin == null)
             return;
 
+        collected = true;
         isCollecting = true;
-
-        // ปิดการกดซ้ำ
-        if (button != null)
-        {
-            button.interactable = false;
-        }
     }
 
+    // =====================
+    // บินไปที่ถังขยะ
+    // =====================
     private void MoveToTrashBin()
     {
         Vector2 targetPosition =
@@ -107,24 +112,15 @@ public class TrashItem : MonoBehaviour
                 collectSpeed * Time.deltaTime
             );
 
-        float distance = Vector2.Distance(
-            rectTransform.anchoredPosition,
-            targetPosition
-        );
-
-        if (distance < 5f)
+        // ถึงถังแล้ว
+        if (Vector2.Distance(
+                rectTransform.anchoredPosition,
+                targetPosition
+            ) < 5f)
         {
-            gameManager.AddWaste();
+            gameManager.CollectWaste();
 
             Destroy(gameObject);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (button != null)
-        {
-            button.onClick.RemoveListener(CollectTrash);
         }
     }
 }

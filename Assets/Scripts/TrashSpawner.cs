@@ -6,12 +6,17 @@ public class TrashSpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameManager gameManager;
     [SerializeField] private RectTransform trashContainer;
+    [SerializeField] private RectTransform trashBin;
     [SerializeField] private TrashItem[] trashPrefabs;
 
     [Header("Spawn Settings")]
-    [SerializeField] private float spawnInterval = 1f;
-    [SerializeField] private float sidePadding = 60f;
-    [SerializeField] private float spawnOffset = 100f;
+    [SerializeField] private float spawnInterval = 1.5f;
+
+    [Header("Position")]
+    [SerializeField] private float spawnY = 600f;
+    [SerializeField] private float floorY = -500f;
+    [SerializeField] private float minX = -400f;
+    [SerializeField] private float maxX = 400f;
 
     private IEnumerator Start()
     {
@@ -19,7 +24,8 @@ public class TrashSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnInterval);
 
-            if (gameManager != null && !gameManager.IsGameOver)
+            if (gameManager != null &&
+                !gameManager.IsGameOver)
             {
                 SpawnTrash();
             }
@@ -28,38 +34,44 @@ public class TrashSpawner : MonoBehaviour
 
     private void SpawnTrash()
     {
-        if (trashContainer == null ||
-            trashPrefabs == null ||
+        if (trashContainer == null) return;
+
+        if (trashPrefabs == null ||
             trashPrefabs.Length == 0)
         {
             return;
         }
 
-        int randomIndex = Random.Range(0, trashPrefabs.Length);
+        int randomIndex = Random.Range(
+            0,
+            trashPrefabs.Length
+        );
 
         TrashItem newTrash = Instantiate(
             trashPrefabs[randomIndex],
             trashContainer
         );
 
-        float halfWidth = trashContainer.rect.width * 0.5f;
-        float halfHeight = trashContainer.rect.height * 0.5f;
-
-        float randomX = Random.Range(
-            -halfWidth + sidePadding,
-            halfWidth - sidePadding
-        );
-
         RectTransform trashRect =
             newTrash.GetComponent<RectTransform>();
 
-        trashRect.anchoredPosition = new Vector2(
-            randomX,
-            halfHeight + spawnOffset
+        // สุ่มตำแหน่งซ้าย-ขวา
+        float randomX = Random.Range(
+            minX,
+            maxX
         );
 
-        float destroyY = -halfHeight - spawnOffset;
+        // เริ่มจากด้านบน
+        trashRect.anchoredPosition = new Vector2(
+            randomX,
+            spawnY
+        );
 
-        newTrash.Initialize(gameManager, destroyY);
+        // ส่ง GameManager + ถังขยะ + ตำแหน่งพื้น
+        newTrash.Initialize(
+            gameManager,
+            trashBin,
+            floorY
+        );
     }
 }

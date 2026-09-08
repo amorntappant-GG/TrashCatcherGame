@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30503fbc77fbf804a9448b58dbd73e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashItem
-  fallSpeed: 300
+  fallSpeed: 400
   collectSpeed: 1000
 --- !u!95 &-4562279894780125137
 Animator:

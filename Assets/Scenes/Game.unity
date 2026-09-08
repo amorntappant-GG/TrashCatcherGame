@@ -1214,8 +1214,9 @@ MonoBehaviour:
   trashPrefabs:
   - {fileID: 7296955170877508866, guid: 92a0b35da10898e4db85a14ddc24be32, type: 3}
   - {fileID: 7296955170877508866, guid: b2a752485c0e1cf40b3b498e1fdad585, type: 3}
+  - {fileID: 7296955170877508866, guid: fd94d722c34c0bd4280c88287dca51b1, type: 3}
   spawnInterval: 1
-  trashPerSpawn: 5
+  trashPerSpawn: 20
   spawnY: 600
   floorY: -1200
   minX: -400

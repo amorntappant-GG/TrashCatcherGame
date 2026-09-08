@@ -1213,6 +1213,7 @@ MonoBehaviour:
   trashBin: {fileID: 60631319}
   trashPrefabs:
   - {fileID: 7296955170877508866, guid: 92a0b35da10898e4db85a14ddc24be32, type: 3}
+  - {fileID: 7296955170877508866, guid: b2a752485c0e1cf40b3b498e1fdad585, type: 3}
   spawnInterval: 1
   trashPerSpawn: 5
   spawnY: 600

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 285373681326396894}
   - component: {fileID: 3963886985832422867}
   - component: {fileID: 7296955170877508866}
-  - component: {fileID: -361572850405036094}
+  - component: {fileID: -1982147901531532866}
   m_Layer: 5
-  m_Name: Trash
+  m_Name: Trash 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7518847591770146933, guid: f5e8f202a9db12242812c321b79659d9, type: 3}
+  m_Sprite: {fileID: -2111580616454945311, guid: ad7622a824263e34385e5864ca538a55, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30503fbc77fbf804a9448b58dbd73e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashItem
-  fallSpeed: 600
+  fallSpeed: 300
   collectSpeed: 1000
---- !u!95 &-361572850405036094
+--- !u!95 &-1982147901531532866
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ Animator:
   m_GameObject: {fileID: 1110016983009069841}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fbdb4e90dadafcc488e38aee75d36433, type: 2}
+  m_Controller: {fileID: 9100000, guid: 556787f809d027e41a38127441e39071, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

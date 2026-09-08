@@ -482,7 +482,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -524,6 +524,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2130637347}
+  - {fileID: 2010865652}
   - {fileID: 910371759}
   - {fileID: 232344538}
   - {fileID: 1664998191}
@@ -701,6 +703,7 @@ MonoBehaviour:
   maxCombo: 3
   maxOverload: 100
   overloadIncrease: 10
+  overloadTrashImages: []
 --- !u!1 &434496918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,8 +1218,8 @@ MonoBehaviour:
   - {fileID: 7296955170877508866, guid: 92a0b35da10898e4db85a14ddc24be32, type: 3}
   - {fileID: 7296955170877508866, guid: b2a752485c0e1cf40b3b498e1fdad585, type: 3}
   - {fileID: 7296955170877508866, guid: fd94d722c34c0bd4280c88287dca51b1, type: 3}
-  spawnInterval: 1
-  trashPerSpawn: 20
+  spawnInterval: 0.5
+  trashPerSpawn: 5
   spawnY: 600
   floorY: -1200
   minX: -400
@@ -1382,6 +1385,7 @@ MonoBehaviour:
   maxCombo: 3
   maxOverload: 100
   overloadIncrease: 10
+  overloadTrashImages: []
 --- !u!1 &1029825813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,6 +1738,7 @@ MonoBehaviour:
   maxCombo: 3
   maxOverload: 100
   overloadIncrease: 10
+  overloadTrashImages: []
 --- !u!1 &1602842986
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,10 +2028,21 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1714036515}
   restartButton: {fileID: 2022169948}
   winPanel: {fileID: 1029825813}
-  winScore: 800
+  winScore: 50000
   maxCombo: 3
   maxOverload: 100
-  overloadIncrease: 10
+  overloadIncrease: 1
+  overloadTrashImages:
+  - {fileID: 2130637346}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1714036515
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,7 +2079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -25.124, y: 21.5699}
+  m_AnchoredPosition: {x: -25.124, y: 21.569946}
   m_SizeDelta: {x: 1671.2, y: 1129.1511}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1714036517
@@ -2447,13 +2463,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010865651}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 990.2679, y: 842.4719, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 30.267883, y: 302.47192, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 651733438}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 228787812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2022169946
 GameObject:
@@ -2588,6 +2604,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022169946}
   m_CullTransparentMesh: 1
+--- !u!1 &2130637346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2130637347}
+  - component: {fileID: 2130637350}
+  - component: {fileID: 2130637349}
+  - component: {fileID: 2130637348}
+  m_Layer: 5
+  m_Name: _Trash Images1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2130637347
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130637346}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 228787812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 710, y: -290}
+  m_SizeDelta: {x: 500, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &2130637348
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130637346}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a54ce0232233d94fb00a8bb53c7b3d4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2130637349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130637346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 6802033678843964677, guid: c2cba29749743c641bf341c372a9471f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2130637350
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130637346}
+  m_CullTransparentMesh: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2597,4 +2711,3 @@ SceneRoots:
   - {fileID: 1787486697}
   - {fileID: 228787812}
   - {fileID: 1206665836}
-  - {fileID: 2010865652}

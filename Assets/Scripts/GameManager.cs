@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     [Header("Overload Settings")]
     [SerializeField] private float maxOverload = 100f;
     [SerializeField] private float overloadIncrease = 10f;
+    
+    [Header("Overload Visuals")]
+    [SerializeField] private GameObject[] overloadTrashImages; 
 
     private int score;
     private int combo;
@@ -60,6 +63,8 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateUI();
+        
+        UpdateOverloadVisuals(); 
     }
 
     public void CollectWaste()
@@ -96,10 +101,27 @@ public class GameManager : MonoBehaviour
         overload = Mathf.Clamp(overload, 0f, maxOverload);
 
         UpdateUI();
+        
+        UpdateOverloadVisuals();
 
         if (overload >= maxOverload)
         {
             TriggerGameOver();
+        }
+    }
+
+    private void UpdateOverloadVisuals()
+    {
+        if (overloadTrashImages == null || overloadTrashImages.Length == 0) return;
+        
+        int imagesToShow = Mathf.FloorToInt(overload / 10f);
+
+        for (int i = 0; i < overloadTrashImages.Length; i++)
+        {
+            if (overloadTrashImages[i] != null)
+            {
+                overloadTrashImages[i].SetActive(i < imagesToShow);
+            }
         }
     }
 

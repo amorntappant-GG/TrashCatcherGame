@@ -26,19 +26,20 @@ public class TrashSpawner : MonoBehaviour
             if (gameManager != null &&
                 !gameManager.IsGameOver)
             {
-                // Spawn ขยะหลายชิ้นพร้อมกัน
-                SpawnTrashGroup();
+                StartCoroutine(SpawnTrashRain());
             }
 
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
-    private void SpawnTrashGroup()
+    
+    private IEnumerator SpawnTrashRain()
     {
         for (int i = 0; i < trashPerSpawn; i++)
         {
             SpawnTrash();
+            
+            yield return new WaitForSeconds(Random.Range(0.05f, 0.25f));
         }
     }
 
@@ -64,17 +65,17 @@ public class TrashSpawner : MonoBehaviour
 
         RectTransform trashRect =
             newTrash.GetComponent<RectTransform>();
-
-        // สุ่มตำแหน่งซ้าย-ขวา
+        
         float randomX = Random.Range(
             minX,
             maxX
         );
+        
+        float randomY = spawnY + Random.Range(-100f, 100f);
 
-        // เริ่มจากด้านบน
         trashRect.anchoredPosition = new Vector2(
             randomX,
-            spawnY
+            randomY
         );
 
         newTrash.Initialize(

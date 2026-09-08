@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 285373681326396894}
   - component: {fileID: 3963886985832422867}
   - component: {fileID: 7296955170877508866}
+  - component: {fileID: -361572850405036094}
   m_Layer: 5
   m_Name: Trash
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8248327718669187116, guid: 0afd028f03062c84fbf6a9a7d247c7eb, type: 3}
+  m_Sprite: {fileID: 7518847591770146933, guid: f5e8f202a9db12242812c321b79659d9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -134,3 +135,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashItem
   fallSpeed: 250
+  collectSpeed: 1000
+--- !u!95 &-361572850405036094
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110016983009069841}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fbdb4e90dadafcc488e38aee75d36433, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
